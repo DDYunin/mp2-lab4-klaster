@@ -14,16 +14,16 @@ bool Klaster::IsKlasterFree(int _num_proc)
 
 void Klaster::PutTaskInKlaster(Task& ts)
 {
-	int num_remained_proc = ts.num_proc_for_work;
+	int num_remained_processor = ts.num_proc_for_work;
 	for (int i = 0; i < number_proc; i++)
 	{
 		if (ArrayProc[i] == true)
 		{
 			ts.ArrIndex.push_back(i);
 			ArrayProc[i] = false;
-			num_remained_proc--;
+			num_remained_processor--;
 		}
-		if (num_remained_proc == 0)
+		if (num_remained_processor == 0)
 			break;
 	}
 }
