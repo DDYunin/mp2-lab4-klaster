@@ -13,7 +13,8 @@ class TaskStream
 private:
 	double TaskIntåns; // èíòåíñèâíîñòü ïîòîêà çàäà÷
 public:
-	TaskStream(double _TaskIntens) {
+	TaskStream(double _TaskIntens) 
+	{
 		if (_TaskIntens > 1 || _TaskIntens < 0)
 			throw "Error! Uncorrect data!";
 		TaskIntåns = _TaskIntens;
@@ -21,6 +22,7 @@ public:
 	}
 	Task CreateNewTask(int _time_app, int _id, int num_proc);
 	bool IsTask();
+	int NumTasks();
 	void ChangeTimeForEndTask(Task& ts, int _index);
 };
 

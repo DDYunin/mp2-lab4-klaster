@@ -18,6 +18,12 @@ TEST(TasksStream, can_determine_create_task_or_no)
 	ASSERT_NO_THROW(ts.IsTask());
 }
 
+TEST(TasksStream, can_determine_how_much_task_will_create_on_1_takts_from_1_to_3)
+{
+	TaskStream ts(0.2);
+	ASSERT_NO_THROW(ts.NumTasks());
+}
+
 TEST(TasksStream, can_change_end_time_for_task)
 {
 	TaskStream ts(0.2);

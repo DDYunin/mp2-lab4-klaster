@@ -22,7 +22,6 @@ private:
 	void PutTaskInKlaster(Task& ts);
 	bool IsDeleteTask(Task& ts, int _now_takt);
 	void DeleteTask(Task& ts);
-
 public:
 	Klaster(int _num_takts, int _num_proc, int _q_size);
 	void Work(double _intensiv);

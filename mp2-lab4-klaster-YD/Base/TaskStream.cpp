@@ -19,6 +19,12 @@ bool TaskStream::IsTask()
         return false;
 }
 
+int TaskStream::NumTasks()
+{
+    int num = rand() % 3 + 1;
+    return num;
+}
+
 void TaskStream::ChangeTimeForEndTask(Task& ts, int _index)
 {
     ts.DetermineTimeExecutin(_index);

@@ -3,7 +3,7 @@
 
 TEST(TQueue, can_create_queue)
 {
-  ASSERT_NO_THROW(TQueue<int> q(3));
+	ASSERT_NO_THROW(TQueue<int> q(3));
 }
 
 TEST(TQueue, cant_create_queue_with_negative)
@@ -66,7 +66,7 @@ TEST(TQueue, get_correct_queue_data_count)
 {
 	TQueue<int> q(3);
 	q.Push(6);
-	ASSERT_NO_THROW(1,q.GetCountData());
+	ASSERT_NO_THROW(1, q.GetCountData());
 }
 
 TEST(TQueue, can_print_queue)

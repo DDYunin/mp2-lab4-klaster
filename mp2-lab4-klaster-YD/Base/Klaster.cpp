@@ -31,9 +31,7 @@ void Klaster::PutTaskInKlaster(Task& ts)
 bool Klaster::IsDeleteTask(Task& ts, int _now_takt)
 {
 	if (_now_takt == ts.time_execution)
-	{
 		return true;
-	}
 	return false;
 }
 
@@ -42,10 +40,8 @@ void Klaster::DeleteTask(Task& ts)
 	for (int i = 0; i < number_proc; i++) 
 	{
 		for (int j = 0; j < ts.ArrIndex.size(); j++)
-		{
 			if (i == ts.ArrIndex[j])
 				ArrayProc[i] = true;
-		}
 	}
 }
 
@@ -66,6 +62,7 @@ void Klaster::Work(double _intensiv)
 	TaskStream task_manager(_intensiv);
 	int task_id = 1;
 	long sum = 0;
+	int num_tasks = 0;
 	bool IsWork = false;
 	Task temp_task;
 	vector<Task> v_for_com_tasks;//вектор, чтобы контролировать выполн€ющие задани€.
@@ -74,13 +71,20 @@ void Klaster::Work(double _intensiv)
 	{
 		if (task_manager.IsTask())
 		{
-			temp_task = task_manager.CreateNewTask(i, task_id, number_proc);
-			task_id++;
-			if (!(que.Full()))
-				que.Push(temp_task);
-			else
-				statistic.NumRejection++;
-			statistic.NumAppearedTasks++;
+			num_tasks = task_manager.NumTasks();
+			//cout << "число заданий = " << num_tasks << endl;
+			int l = 0;
+			while (l < num_tasks)
+			{
+				temp_task = task_manager.CreateNewTask(i, task_id, number_proc);
+				task_id++;
+				if (!(que.Full()))
+					que.Push(temp_task);
+				else
+					statistic.NumRejection++;
+				statistic.NumAppearedTasks++;
+				l++;
+			}
 		}
 		vector<bool> v_for_exit_loop(v_for_com_tasks.size());
 		for (int j = 0; j < v_for_com_tasks.size(); j++)
@@ -94,16 +98,12 @@ void Klaster::Work(double _intensiv)
 				{
 					DeleteTask(v_for_com_tasks[j]);
 					statistic.NumCompleteTasks++;
-					//Ќо нужно ещЄ между прочим и массив процессоров освободить
 					v_for_com_tasks.erase(v_for_com_tasks.begin() + j);
 					v_for_exit_loop.erase(v_for_exit_loop.begin() + j);
 					break;
 				}
 				else
 					v_for_exit_loop[j] = false;
-				//Ќужно сн€ть задачу?
-					//—н€ть задачу
-				//выйти из цикла
 			}
 			int k = 0;
 			for (int j = 0; j < v_for_exit_loop.size(); j++)
@@ -111,7 +111,6 @@ void Klaster::Work(double _intensiv)
 					k++;
 			if (k == 0)
 				flag = true;
-			//как выйти из цикла?
 			if ((v_for_com_tasks.empty()) || (flag))
 				break;
 		}
@@ -132,7 +131,8 @@ void Klaster::Work(double _intensiv)
 		
 		//посчитать количество зан€тых
 		for (int j = 0; j < number_proc; j++)
-			if (ArrayProc[j] == false) {
+			if (ArrayProc[j] == false) 
+			{
 				sum++;
 				IsWork = true;
 			}

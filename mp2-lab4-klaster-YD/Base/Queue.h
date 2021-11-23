@@ -33,9 +33,6 @@ public:
 	~TQueue();
 };
 
-
-
-
 template<typename ValType>
 int TQueue<ValType>::GetNextIndex(int index)
 {
@@ -46,9 +43,7 @@ template<typename ValType>
 TQueue<ValType>::TQueue(int _QueueSize) 
 {
 	if (_QueueSize < 1)
-	{
 		throw "ERROR! Size is negative number or 0";
-	}
 	QueueSize = _QueueSize;
 	pQueueArray = new ValType[QueueSize];
 	HeadIndex = 0;
@@ -71,9 +66,8 @@ int TQueue<ValType>::GetCountData()
 template<typename ValType>
 void TQueue<ValType>::Push(const ValType& data)
 {
-	if (Full()) {
+	if (Full())
 		throw "ERROR! Unable to put an element.";
-	}
 	TailIndex = GetNextIndex(TailIndex);
 	pQueueArray[TailIndex] = data;
 	CountData++;
@@ -82,9 +76,8 @@ void TQueue<ValType>::Push(const ValType& data)
 template<typename ValType>
 void TQueue<ValType>::Pop()
 {
-	if (Empty()) {
+	if (Empty())
 		throw "ERROR! Unable to put an element.";
-	}
 	HeadIndex = GetNextIndex(HeadIndex);
 	CountData--;
 }

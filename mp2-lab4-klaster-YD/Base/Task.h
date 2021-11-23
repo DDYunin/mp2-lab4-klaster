@@ -25,6 +25,7 @@ struct Task
 		num_proc_for_work = 0;
 		time_start_of_ex = 0;
 	}
+
 	void PutAll(int _task_id, int _time_appearence, int _duration, int _num_proc_for_work)
 	{
 		task_id = _task_id;
@@ -32,6 +33,7 @@ struct Task
 		duration = _duration;
 		num_proc_for_work = _num_proc_for_work;
 	}
+
 	void DetermineTimeExecutin(int _time_start_of_execution)
 	{
 		time_start_of_ex = _time_start_of_execution;
